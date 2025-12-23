@@ -1,139 +1,185 @@
 ---
-import Modal from '../components/Modal.astro';
-import Tabs from '../components/Tabs.astro';
-import Accordion from '../components/Accordion.astro';
+import Modal from "../components/Modal.astro";
+import Tabs from "../components/Tabs.astro";
+import Accordion from "../components/Accordion.astro";
 
 const productTabs = [
-  { id: 'details', label: 'Details', content: '<p>Hochwertiges T-Shirt aus 100% Bio-Baumwolle. Perfekt fuer Entwickler, die Web Components lieben.</p>' },
-  { id: 'specs', label: 'Spezifikationen', content: '<ul><li>Material: 100% Bio-Baumwolle</li><li>Gewicht: 180g/m2</li><li>Passform: Regular Fit</li></ul>' },
-  { id: 'reviews', label: 'Bewertungen', content: '<p><strong>5/5 Sterne</strong> - "Beste Web Components Merch ever!" - Max M.</p>' }
+    {
+        id: "details",
+        label: "Details",
+        content:
+            "<p>Hochwertiges T-Shirt aus 100% Bio-Baumwolle. Perfekt fuer Entwickler, die Web Components lieben.</p>",
+    },
+    {
+        id: "specs",
+        label: "Spezifikationen",
+        content:
+            "<ul><li>Material: 100% Bio-Baumwolle</li><li>Gewicht: 180g/m2</li><li>Passform: Regular Fit</li></ul>",
+    },
+    {
+        id: "reviews",
+        label: "Bewertungen",
+        content:
+            '<p><strong>5/5 Sterne</strong> - "Beste Web Components Merch ever!" - Max M.</p>',
+    },
 ];
 
 const faqItems = [
-  { title: 'Was sind Headless Components?', content: 'Headless Components bieten Verhalten ohne Styling. Sie binden JavaScript-Funktionen an Standard-HTML und ueberlassen das CSS dem Entwickler.' },
-  { title: 'Wann sollte ich Atlas verwenden?', content: 'Atlas eignet sich fuer Projekte, die volle Kontrolle ueber Markup und Styling benoetigen, SSR-Kompatibilitaet erfordern und auf bewaeerte Accessibility-Patterns setzen wollen.' },
-  { title: 'Funktioniert Atlas mit Astro?', content: 'Ja! Atlas ist SSR-safe by design und funktioniert nahtlos mit Astro. Die Initialisierung erfolgt erst im Browser.' }
+    {
+        title: "Was sind Headless Components?",
+        content:
+            "Headless Components bieten Verhalten ohne Styling. Sie binden JavaScript-Funktionen an Standard-HTML und ueberlassen das CSS dem Entwickler.",
+    },
+    {
+        title: "Wann sollte ich Atlas verwenden?",
+        content:
+            "Atlas eignet sich fuer Projekte, die volle Kontrolle ueber Markup und Styling benoetigen, SSR-Kompatibilitaet erfordern und auf bewaeerte Accessibility-Patterns setzen wollen.",
+    },
+    {
+        title: "Funktioniert Atlas mit Astro?",
+        content:
+            "Ja! Atlas ist SSR-safe by design und funktioniert nahtlos mit Astro. Die Initialisierung erfolgt erst im Browser.",
+    },
 ];
 ---
 
 <!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atlas Components Demo</title>
-  <link rel="stylesheet" href="/styles/global.css" />
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Atlas Components in Astro</h1>
-      <p class="subtitle">Headless UI mit Vanilla JavaScript</p>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Atlas Components Demo</title>
+        <link rel="stylesheet" href="/styles/global.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Atlas Components in Astro</h1>
+                <p class="subtitle">Headless UI mit Vanilla JavaScript</p>
+            </header>
 
-    <main>
-      <section class="demo-section">
-        <h2>Modal</h2>
-        <p>Klicken Sie den Button, um das Modal zu oeffnen.</p>
-        <button id="open-modal" class="btn btn-primary">Modal oeffnen</button>
+            <main>
+                <section class="demo-section">
+                    <h2>Modal</h2>
+                    <p>Klicken Sie den Button, um das Modal zu öffnen.</p>
+                    <button id="open-modal" class="btn btn-primary"
+                        >Modal öffnen</button
+                    >
 
-        <Modal id="demo-modal" title="Bestaetigung" description="Moechten Sie diese Aktion wirklich durchfuehren?">
-          <div class="modal-actions">
-            <button data-modal-close class="btn">Abbrechen</button>
-            <button class="btn btn-primary">Bestaetigen</button>
-          </div>
-        </Modal>
-      </section>
+                    <Modal
+                        id="demo-modal"
+                        title="Bestaetigung"
+                        description="Moechten Sie diese Aktion wirklich durchfuehren?"
+                    >
+                        <div class="modal-actions">
+                            <button data-modal-close class="btn"
+                                >Abbrechen</button
+                            >
+                            <button class="btn btn-primary">Bestaetigen</button>
+                        </div>
+                    </Modal>
+                </section>
 
-      <section class="demo-section">
-        <h2>Tabs</h2>
-        <p>Produktinformationen mit Tab-Navigation.</p>
-        <Tabs id="product-tabs" tabs={productTabs} />
-      </section>
+                <section class="demo-section">
+                    <h2>Tabs</h2>
+                    <p>Produktinformationen mit Tab-Navigation.</p>
+                    <Tabs id="product-tabs" tabs={productTabs} />
+                </section>
 
-      <section class="demo-section">
-        <h2>Accordion</h2>
-        <p>FAQ-Bereich mit aufklappbaren Antworten.</p>
-        <Accordion id="faq-accordion" items={faqItems} />
-      </section>
-    </main>
-  </div>
+                <section class="demo-section">
+                    <h2>Accordion</h2>
+                    <p>FAQ-Bereich mit aufklappbaren Antworten.</p>
+                    <Accordion id="faq-accordion" items={faqItems} />
+                </section>
+            </main>
+        </div>
 
-  <script>
-    // Modal Logic
-    const modal = document.getElementById('demo-modal');
-    const openBtn = document.getElementById('open-modal');
+        <script>
+            // Modal Logic
+            const modal = document.getElementById("demo-modal");
+            const openBtn = document.getElementById("open-modal");
 
-    openBtn?.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    });
-
-    modal?.querySelectorAll('[data-modal-close]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      });
-    });
-
-    modal?.querySelector('.modal-backdrop')?.addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal?.style.display === 'flex') {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    });
-
-    // Tabs Logic
-    document.querySelectorAll('.tabs-container').forEach(container => {
-      const tabs = container.querySelectorAll('[role="tab"]');
-      const panels = container.querySelectorAll('[role="tabpanel"]');
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => {
-            t.setAttribute('aria-selected', 'false');
-            t.classList.remove('active');
-          });
-          panels.forEach(p => p.hidden = true);
-
-          tab.setAttribute('aria-selected', 'true');
-          tab.classList.add('active');
-
-          const panelId = tab.getAttribute('aria-controls');
-          document.getElementById(panelId).hidden = false;
-        });
-      });
-    });
-
-    // Accordion Logic
-    document.querySelectorAll('.accordion').forEach(accordion => {
-      const allowMultiple = accordion.dataset.allowMultiple === 'true';
-      const triggers = accordion.querySelectorAll('.accordion-trigger');
-
-      triggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-          const contentId = trigger.getAttribute('aria-controls');
-          const content = document.getElementById(contentId);
-
-          if (!allowMultiple) {
-            triggers.forEach(t => {
-              t.setAttribute('aria-expanded', 'false');
-              const cId = t.getAttribute('aria-controls');
-              document.getElementById(cId).hidden = true;
+            openBtn?.addEventListener("click", () => {
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
             });
-          }
 
-          trigger.setAttribute('aria-expanded', (!isExpanded).toString());
-          content.hidden = isExpanded;
-        });
-      });
-    });
-  </script>
-</body>
+            modal?.querySelectorAll("[data-modal-close]").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "";
+                });
+            });
+
+            modal
+                ?.querySelector(".modal-backdrop")
+                ?.addEventListener("click", () => {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "";
+                });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && modal?.style.display === "flex") {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "";
+                }
+            });
+
+            // Tabs Logic
+            document
+                .querySelectorAll(".tabs-container")
+                .forEach((container) => {
+                    const tabs = container.querySelectorAll('[role="tab"]');
+                    const panels =
+                        container.querySelectorAll('[role="tabpanel"]');
+
+                    tabs.forEach((tab) => {
+                        tab.addEventListener("click", () => {
+                            tabs.forEach((t) => {
+                                t.setAttribute("aria-selected", "false");
+                                t.classList.remove("active");
+                            });
+                            panels.forEach((p) => (p.hidden = true));
+
+                            tab.setAttribute("aria-selected", "true");
+                            tab.classList.add("active");
+
+                            const panelId = tab.getAttribute("aria-controls");
+                            document.getElementById(panelId).hidden = false;
+                        });
+                    });
+                });
+
+            // Accordion Logic
+            document.querySelectorAll(".accordion").forEach((accordion) => {
+                const allowMultiple =
+                    accordion.dataset.allowMultiple === "true";
+                const triggers =
+                    accordion.querySelectorAll(".accordion-trigger");
+
+                triggers.forEach((trigger) => {
+                    trigger.addEventListener("click", () => {
+                        const isExpanded =
+                            trigger.getAttribute("aria-expanded") === "true";
+                        const contentId = trigger.getAttribute("aria-controls");
+                        const content = document.getElementById(contentId);
+
+                        if (!allowMultiple) {
+                            triggers.forEach((t) => {
+                                t.setAttribute("aria-expanded", "false");
+                                const cId = t.getAttribute("aria-controls");
+                                document.getElementById(cId).hidden = true;
+                            });
+                        }
+
+                        trigger.setAttribute(
+                            "aria-expanded",
+                            (!isExpanded).toString(),
+                        );
+                        content.hidden = isExpanded;
+                    });
+                });
+            });
+        </script>
+    </body>
 </html>
