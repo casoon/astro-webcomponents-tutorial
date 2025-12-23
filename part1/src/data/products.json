@@ -1,0 +1,6 @@
+[
+  {"id": "1", "name": "Astro T-Shirt", "price": "29.99", "image": "/images/tshirt.jpg", "category": "clothing"},
+  {"id": "2", "name": "Web Components Hoodie", "price": "49.99", "image": "/images/hoodie.jpg", "category": "clothing"},
+  {"id": "3", "name": "JavaScript Mug", "price": "14.99", "image": "/images/mug.jpg", "category": "accessories"},
+  {"id": "4", "name": "Developer Stickers", "price": "4.99", "image": "/images/stickers.jpg", "category": "accessories"}
+]

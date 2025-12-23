@@ -1,0 +1,82 @@
+---
+interface Props {
+  id: string;
+  tabs: Array<{ id: string; label: string; content: string }>;
+}
+
+const { id, tabs } = Astro.props;
+---
+
+<div id={id} class="tabs-container">
+  <div role="tablist" class="tab-list">
+    {tabs.map((tab, index) => (
+      <button
+        role="tab"
+        id={`${id}-tab-${tab.id}`}
+        aria-selected={index === 0 ? 'true' : 'false'}
+        aria-controls={`${id}-panel-${tab.id}`}
+        class={index === 0 ? 'active' : ''}
+      >
+        {tab.label}
+      </button>
+    ))}
+  </div>
+
+  {tabs.map((tab, index) => (
+    <div
+      role="tabpanel"
+      id={`${id}-panel-${tab.id}`}
+      aria-labelledby={`${id}-tab-${tab.id}`}
+      hidden={index !== 0}
+      class="tab-panel"
+    >
+      <Fragment set:html={tab.content} />
+    </div>
+  ))}
+</div>
+
+<style>
+  .tabs-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .tab-list {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+  }
+
+  [role="tab"] {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  [role="tab"]:hover {
+    color: #1f2937;
+    background: #f3f4f6;
+  }
+
+  [role="tab"].active {
+    color: #2563eb;
+    background: white;
+    border-bottom: 2px solid #2563eb;
+    margin-bottom: -1px;
+  }
+
+  .tab-panel {
+    padding: 1.5rem;
+  }
+
+  .tab-panel[hidden] {
+    display: none;
+  }
+</style>

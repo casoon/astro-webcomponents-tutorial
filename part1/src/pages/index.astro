@@ -1,0 +1,58 @@
+---
+import Layout from '../components/ui/Layout.astro';
+import products from '../data/products.json';
+
+const categories = [
+  { id: 'clothing', name: 'Kleidung' },
+  { id: 'accessories', name: 'Zubehoer' }
+];
+---
+
+<Layout title="Web Components Shop">
+  <div class="container">
+    <header>
+      <h1>Unsere Produkte</h1>
+      <shopping-cart></shopping-cart>
+    </header>
+
+    <filter-bar categories={JSON.stringify(categories)}></filter-bar>
+
+    <div class="product-grid" id="product-grid">
+      {products.map(product => (
+        <product-card
+          product-id={product.id}
+          name={product.name}
+          price={product.price}
+          image={product.image}
+          data-category={product.category}>
+        </product-card>
+      ))}
+    </div>
+  </div>
+
+  <script>
+    import '../components/wc/product-card.js';
+    import '../components/wc/shopping-cart.js';
+    import '../components/wc/filter-bar.js';
+
+    // Add-to-Cart Handler
+    document.addEventListener('add-to-cart', (event) => {
+      const cart = document.querySelector('shopping-cart');
+      cart.addItem(event.detail);
+    });
+
+    // Filter Handler
+    document.addEventListener('filter-change', (event) => {
+      const { category } = event.detail;
+      const products = document.querySelectorAll('product-card');
+
+      products.forEach(product => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</Layout>
